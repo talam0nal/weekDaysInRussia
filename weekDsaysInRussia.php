@@ -1,9 +1,7 @@
 <?php
-	error_reporting(E_ALL);
-
 	class weekDaysInRussia {
 
-		function __conctruct() {
+		function weekDaysInRussia() {
 			echo "Hi!";
 		}
 		/*
