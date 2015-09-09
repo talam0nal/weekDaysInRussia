@@ -2,7 +2,17 @@
 	class weekDaysInRussia {
 
 		function weekDaysInRussia() {
-			echo "Hi!";
+			/*
+				Демо
+			*/
+			echo "В ".$this->currentRussianMonthInPrepositional();
+			echo " ";
+			echo $this->numberOfWorkDaysInCurrentMonth();
+			echo " рабочих дня и ";
+			echo $this->numberOfWorkingHoursInThisMonth();
+			echo " рабочих часов<br>";
+			echo "Текущий рабочий день: ";
+			echo $this->currentWorkingDay();
 		}
 		/*
 			Возвращает список русских месяцев в предложном падеже
