@@ -39,7 +39,7 @@
 		Возвращает текущий месяц на русском языке в предложном падеже
 	*/
 	function currentRussianMonthInPrepositional() {
-		$month = date('j');
+		$month = date('n');
 		$array = $this->russianMonthInPrepositional();
 		return $array[$month];
 	}
