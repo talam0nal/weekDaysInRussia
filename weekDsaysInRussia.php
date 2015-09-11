@@ -23,7 +23,6 @@
 			Демо
 		*/
 		function weekDaysInRussia() {
-			/*
 			echo "В ".$this->currentRussianMonthInPrepositional();
 			echo " ";
 			echo $this->numberOfWorkDaysInCurrentMonth();
@@ -32,11 +31,8 @@
 			echo " рабочих часов<br>";
 			echo "Текущий рабочий день: ";
 			echo $this->currentWorkingDay();
-			*/
-			//$apiResponse = $this->getRussianRedLetterDays();
-			//var_dump($apiResponse->data->2015)
-			$s = $this->monthInThisYearWithRedLetterDays();
-			var_dump($s);
+
+			$this->redLetterDaysInThisMonth();
 		}
 
 		/*
@@ -47,6 +43,23 @@
 			$months = [];
 			foreach ($apiResponse->data->{date('Y')} as $key => $value) $months[] = $key;
 			return $months;
+		}
+
+		/* 
+			Если в текущем месяце есть праздники, возвращает true
+		*/
+		function currentMonthHaveRedLettersDays() {
+			return in_array(date('n'), $this->monthInThisYearWithRedLetterDays());
+		}
+
+		/*
+			Возвращает сокращённые и выходные дни в текущем месяце
+		*/
+		function redLetterDaysInThisMonth() {
+			$apiResponse = $this->getRussianRedLetterDays();
+			$days = [];
+			foreach ($apiResponse->data->{date('Y')}->{11} as $key => $value) $days[] = $key;
+			return $days;
 		}
 
 		/*
@@ -105,15 +118,23 @@
 				$dayPlusOne = $day+1;
 				$timestamp = strtotime($dayPlusOne.".".date('n').".".date('Y'));
 
-				if (!in_array(date('D', $timestamp), $this->weekEndDays)) {
-					$numberOfWorkDaysInCurrentMonth++;
+				if ( $this->currentMonthHaveRedLettersDays() ) {
+					//требуется особая проверка
+				} else {
+					//особой проверки не требуется, следовательно работаем по обычному алгоритму
+					if (!in_array(date('D', $timestamp), $this->weekEndDays)) {
+						$numberOfWorkDaysInCurrentMonth++;
+					}
+
+					//Если текущий день совпадает с днём в текущей итерации,
+					//то вычисляем порядковый номер рабочего дня в этом месяце
+					if ($timestamp === strtotime(date('j.n.Y'))) {
+						$currentWorkingDayInThisMonth = $numberOfWorkDaysInCurrentMonth-1;
+					}
+
 				}
 
-				//Если текущий день совпадает с днём в текущей итерации,
-				//то вычисляем порядковый номер рабочего дня в этом месяце
-				if ($timestamp === strtotime(date('j.n.Y'))) {
-					$currentWorkingDayInThisMonth = $numberOfWorkDaysInCurrentMonth-1;
-				}
+
 			}
 
 			$numberOfWorkDaysInCurrentMonth = $numberOfWorkDaysInCurrentMonth-1;
