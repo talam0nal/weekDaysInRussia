@@ -1,5 +1,7 @@
 <?php
 	class weekDaysInRussia {
+		protected $redLettersApiURL = 'http://basicdata.ru/api/json/calend/';
+		protected $weekEndDays = ['Sat', 'Sun'];
 		protected $russianMonthInPrepositional = [
 				'',
 				'январе',
@@ -15,7 +17,6 @@
 				'ноябре',
 				'декабре'
 		];
-		protected $redLettersApiURL = 'http://basicdata.ru/api/json/calend/';
 
 		function weekDaysInRussia() {
 			/*
@@ -102,9 +103,6 @@
 		//Текуший год
 		$currentYear = date('Y');
 
-		//Выходные дни: суббота и воскресенье
-		$weekEndDays = ['Sat', 'Sun'];
-
 		//Счётчик для подсчёта рабочих дней в этом месяце
 		$numberOfWorkDaysInCurrentMonth = 1;
 
@@ -130,7 +128,7 @@
 
 			//Если это не выходной день, то добавляем к счётчику будних
 			//дней единицу
-			if (!in_array($dayOfWeek, $weekEndDays)) {
+			if (!in_array($dayOfWeek, $this->weekEndDays)) {
 				$numberOfWorkDaysInCurrentMonth++;
 			}
 
