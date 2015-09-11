@@ -63,7 +63,7 @@
 		*/
 		function numberOfWorkingHoursInThisMonth() {
 			$array = $this->workAndWeekendDaysInThisMonth();
-			return $array[1];		
+			return $array[0]*$this->workingHoursPerDay;		
 		}
 
 		/*
@@ -71,7 +71,7 @@
 		*/
 		function currentWorkingDay() {
 			$array = $this->workAndWeekendDaysInThisMonth();
-			return $array[2];
+			return $array[1];
 		}
 
 		/*
@@ -80,10 +80,8 @@
 			Для просчёта "сложных" месяцев будет использоваться API
 			Возвращает одномерный простой массив
 			- 0 - количество рабочих дней в текущем месяце
-			- 1 - количество рабочих часов в текущем месяце
-			- 2 - текущий будний день в этом месяце
+			- 1 - текущий будний день в этом месяце
 		*/
-
 		function workAndWeekendDaysInThisMonth() {
 			$numberOfWorkDaysInCurrentMonth = 1;
 
@@ -106,11 +104,9 @@
 			}
 
 			$numberOfWorkDaysInCurrentMonth = $numberOfWorkDaysInCurrentMonth-1;
-			$numberOfWorkingHoursInThisMonth = $numberOfWorkDaysInCurrentMonth*$this->workingHoursPerDay;
 
 			return [
 				$numberOfWorkDaysInCurrentMonth,
-				$numberOfWorkingHoursInThisMonth,
 				$currentWorkingDayInThisMonth
 			];
 		}
