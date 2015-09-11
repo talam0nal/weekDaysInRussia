@@ -92,30 +92,18 @@
 		*/
 
 		function workAndWeekendDaysInThisMonth() {
-			//Общее количество дней в текущем месяце
-			$daysInTheMonth = date('t');
-
 			//Счётчик для подсчёта рабочих дней в этом месяце
 			$numberOfWorkDaysInCurrentMonth = 1;
-
-			//Текущая дата в формате день.месяц.год (без ведущих нулей)
 			$currentDayString = date('j.n.Y');
 
 			//Таймштамп текущего дня
 			$timestampOfCurrentDay = strtotime($currentDayString);
 
 			//Пробегаем все дни текущего месяца в цикле
-			for ($day=0; $day < $daysInTheMonth; $day++) {
-				//Поскольку отчёт начинается с нуля, прибавляем ко дню единицу
+			for ($day=0; $day < date('t'); $day++) {
 				$dayPlusOne = $day+1;
-
-				//Строковое представление даты
 				$dateString = $dayPlusOne.".".date('n').".".date('Y');
-
-				//Таймштапм 
 				$timestamp = strtotime($dateString);
-
-				//День недели в формате "Sat"
 				$dayOfWeek = date('D', $timestamp);
 
 				//Если это не выходной день, то добавляем к счётчику будних
@@ -132,10 +120,7 @@
 				}
 			}
 
-			//Количество рабочих дней в месяце
 			$numberOfWorkDaysInCurrentMonth = $numberOfWorkDaysInCurrentMonth-1;
-
-			//Количество рабочих часов в месяце
 			$numberOfWorkingHoursInThisMonth = $numberOfWorkDaysInCurrentMonth*$this->workingHoursPerDay;
 
 			return [
