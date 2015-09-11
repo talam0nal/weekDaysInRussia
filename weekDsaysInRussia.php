@@ -45,7 +45,7 @@
 		*/
 		function russianMonthInPrepositional() {
 			return $this->russianMonthInPrepositional;
-	}
+		}
 
 		/*
 			Возвращает текущий месяц на русском языке в предложном падеже
