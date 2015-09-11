@@ -101,13 +101,11 @@
 			//Пробегаем все дни текущего месяца в цикле
 			for ($day=0; $day < date('t'); $day++) {
 				$dayPlusOne = $day+1;
-				$dateString = $dayPlusOne.".".date('n').".".date('Y');
-				$timestamp = strtotime($dateString);
-				$dayOfWeek = date('D', $timestamp);
+				$timestamp = strtotime($dayPlusOne.".".date('n').".".date('Y'));
 
 				//Если это не выходной день, то добавляем к счётчику будних
 				//дней единицу
-				if (!in_array($dayOfWeek, $this->weekEndDays)) {
+				if (!in_array(date('D', $timestamp), $this->weekEndDays)) {
 					$numberOfWorkDaysInCurrentMonth++;
 				}
 
