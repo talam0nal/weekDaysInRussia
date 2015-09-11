@@ -1,5 +1,6 @@
 <?php
 	class weekDaysInRussia {
+		protected $workingHoursPerDay = 8;
 		protected $redLettersApiURL = 'http://basicdata.ru/api/json/calend/';
 		protected $weekEndDays = ['Sat', 'Sun'];
 		protected $russianMonthInPrepositional = [
@@ -135,7 +136,7 @@
 			$numberOfWorkDaysInCurrentMonth = $numberOfWorkDaysInCurrentMonth-1;
 
 			//Количество рабочих часов в месяце
-			$numberOfWorkingHoursInThisMonth = $numberOfWorkDaysInCurrentMonth*8;
+			$numberOfWorkingHoursInThisMonth = $numberOfWorkDaysInCurrentMonth*$this->workingHoursPerDay;
 
 			return [
 				$numberOfWorkDaysInCurrentMonth,
