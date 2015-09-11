@@ -92,10 +92,7 @@
 		*/
 
 		function workAndWeekendDaysInThisMonth() {
-			//Счётчик для подсчёта рабочих дней в этом месяце
 			$numberOfWorkDaysInCurrentMonth = 1;
-
-			//Таймштамп текущего дня
 			$timestampOfCurrentDay = strtotime(date('j.n.Y'));
 
 			//Пробегаем все дни текущего месяца в цикле
@@ -112,8 +109,7 @@
 				//Если текущий день совпадает с днём в текущей итерации,
 				//то вычисляем порядковый номер рабочего дня в этом месяце
 				if ($timestamp === $timestampOfCurrentDay) {
-					//Текущий рабочий день в этом месяце
-					$currentWorkingDay = $numberOfWorkDaysInCurrentMonth-1;
+					$currentWorkingDayInThisMonth = $numberOfWorkDaysInCurrentMonth-1;
 				}
 			}
 
@@ -123,7 +119,7 @@
 			return [
 				$numberOfWorkDaysInCurrentMonth,
 				$numberOfWorkingHoursInThisMonth,
-				$currentWorkingDay
+				$currentWorkingDayInThisMonth
 			];
 		}
 	}
