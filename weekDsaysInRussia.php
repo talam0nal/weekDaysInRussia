@@ -77,7 +77,7 @@
 		/*
 			Метод для расчёта количества рабочих дней в текущем месяце
 			Работает пока что только с "простыми" месяцами, в которых нет праздничных дней.
-			Для просчёта "сложных" месяцев будет использоваться API http://basicdata.ru/api/calend/
+			Для просчёта "сложных" месяцев будет использоваться API
 			Возвращает одномерный простой массив
 			- 0 - количество рабочих дней в текущем месяце
 			- 1 - количество рабочих часов в текущем месяце
@@ -86,7 +86,7 @@
 
 		function workAndWeekendDaysInThisMonth() {
 			$numberOfWorkDaysInCurrentMonth = 1;
-			$timestampOfCurrentDay = strtotime(date('j.n.Y'));
+			//$timestampOfCurrentDay = strtotime(date('j.n.Y'));
 
 			//Пробегаем все дни текущего месяца в цикле
 			for ($day=0; $day < date('t'); $day++) {
@@ -101,7 +101,7 @@
 
 				//Если текущий день совпадает с днём в текущей итерации,
 				//то вычисляем порядковый номер рабочего дня в этом месяце
-				if ($timestamp === $timestampOfCurrentDay) {
+				if ($timestamp === strtotime(date('j.n.Y'))) {
 					$currentWorkingDayInThisMonth = $numberOfWorkDaysInCurrentMonth-1;
 				}
 			}
