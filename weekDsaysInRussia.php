@@ -31,8 +31,6 @@
 			echo " рабочих часов<br>";
 			echo "Текущий рабочий день: ";
 			echo $this->currentWorkingDay();
-
-			$this->redLetterDaysInThisMonth();
 		}
 
 		/*
@@ -60,6 +58,10 @@
 			$days = [];
 			foreach ($apiResponse->data->{date('Y')}->{11} as $key => $value) $days[] = $key;
 			return $days;
+		}
+
+		function thisDayIsHoliday($day) {
+			return in_array($day, $this->redLetterDaysInThisMonth());
 		}
 
 		/*
@@ -120,6 +122,7 @@
 
 				if ( $this->currentMonthHaveRedLettersDays() ) {
 					//требуется особая проверка
+					//теперь нужно определить входит ли конкретно этот день в список выходных исключений
 				} else {
 					//особой проверки не требуется, следовательно работаем по обычному алгоритму
 					if (!in_array(date('D', $timestamp), $this->weekEndDays)) {
