@@ -42,18 +42,11 @@
 		}
 
 		/*
-			Возвращает список русских месяцев в предложном падеже
-		*/
-		function russianMonthInPrepositional() {
-			return $this->russianMonthInPrepositional;
-		}
-
-		/*
 			Возвращает текущий месяц на русском языке в предложном падеже
 		*/
 		function currentRussianMonthInPrepositional() {
 			$month = date('n');
-			$array = $this->russianMonthInPrepositional();
+			$array = $this->russianMonthInPrepositional;
 			return $array[$month];
 		}
 
