@@ -86,7 +86,6 @@
 
 		function workAndWeekendDaysInThisMonth() {
 			$numberOfWorkDaysInCurrentMonth = 1;
-			//$timestampOfCurrentDay = strtotime(date('j.n.Y'));
 
 			//Пробегаем все дни текущего месяца в цикле
 			for ($day=0; $day < date('t'); $day++) {
