@@ -18,10 +18,10 @@
 				'декабре'
 		];
 
+		/*
+			Демо
+		*/
 		function weekDaysInRussia() {
-			/*
-				Демо
-			*/
 			echo "В ".$this->currentRussianMonthInPrepositional();
 			echo " ";
 			echo $this->numberOfWorkDaysInCurrentMonth();
@@ -152,7 +152,6 @@
 				$currentWorkingDay
 			];
 		}
-
 	}
 
 	$initialize = new weekDaysInRussia;
