@@ -74,6 +74,9 @@
 			return count($days);			
 		}
 
+		/* 
+			Проверяет, является ли этот день выходным
+		*/
 		function thisDayIsHoliday($day) {
 			return in_array($day, $this->redLetterDaysInThisMonth());
 		}
