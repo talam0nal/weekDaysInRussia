@@ -1,6 +1,20 @@
 <?php
 	class weekDaysInRussia {
-		protected $test = [];
+		protected $russianMonthInPrepositional = [
+				'',
+				'январе',
+				'феврале',
+				'марте',
+				'апреле',
+				'мае',
+				'июне',
+				'июле',
+				'августе',
+				'сентябре',
+				'октябре',
+				'ноябре',
+				'декабре'
+		];
 		protected $redLettersApiURL = 'http://basicdata.ru/api/json/calend/';
 
 		function weekDaysInRussia() {
@@ -29,21 +43,7 @@
 			Возвращает список русских месяцев в предложном падеже
 		*/
 		function russianMonthInPrepositional() {
-			return [
-				'',
-				'январе',
-				'феврале',
-				'марте',
-				'апреле',
-				'мае',
-				'июне',
-				'июле',
-				'августе',
-				'сентябре',
-				'октябре',
-				'ноябре',
-				'декабре'
-		];
+			return $this->russianMonthInPrepositional;
 	}
 
 	/*
