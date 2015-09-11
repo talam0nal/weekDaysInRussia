@@ -98,7 +98,6 @@
 			$numberOfWorkDaysInCurrentMonth = 1;
 
 			//Текущая дата в формате день.месяц.год (без ведущих нулей)
-			//$currentDayString = date('j').".".date('n').".".date('Y');
 			$currentDayString = date('j.n.Y');
 
 			//Таймштамп текущего дня
