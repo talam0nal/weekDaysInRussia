@@ -23,6 +23,7 @@
 			Демо
 		*/
 		function weekDaysInRussia() {
+			/*
 			echo "В ".$this->currentRussianMonthInPrepositional();
 			echo " ";
 			echo $this->numberOfWorkDaysInCurrentMonth();
@@ -31,6 +32,21 @@
 			echo " рабочих часов<br>";
 			echo "Текущий рабочий день: ";
 			echo $this->currentWorkingDay();
+			*/
+			//$apiResponse = $this->getRussianRedLetterDays();
+			//var_dump($apiResponse->data->2015)
+			$s = $this->monthInThisYearWithRedLetterDays();
+			var_dump($s);
+		}
+
+		/*
+			Возвращает список месяцев в которых есть праздники
+		*/
+		function monthInThisYearWithRedLetterDays() {
+			$apiResponse = $this->getRussianRedLetterDays();
+			$months = [];
+			foreach ($apiResponse->data->{date('Y')} as $key => $value) $months[] = $key;
+			return $months;
 		}
 
 		/*
