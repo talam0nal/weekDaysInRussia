@@ -1,6 +1,6 @@
 <?php
 	class weekDaysInRussia {
-
+		public $test = [];
 		function weekDaysInRussia() {
 			/*
 				Демо
@@ -14,6 +14,15 @@
 			echo "Текущий рабочий день: ";
 			echo $this->currentWorkingDay();
 		}
+
+		/*
+			Делает запрос к API со списком праздничных дней в России
+		*/
+		function getRussianRedLetterDays() {
+			$data = json_decode(file_get_contents('http://basicdata.ru/api/json/calend/'), false);
+			return $data;
+		}
+
 		/*
 			Возвращает список русских месяцев в предложном падеже
 		*/
