@@ -94,12 +94,6 @@
 			//Общее количество дней в текущем месяце
 			$daysInTheMonth = date('t');
 
-			//Текущий день месяца
-			$currentDayInThisMonth = date('j');
-
-			//Текущий месяц
-			$currentMonth = date('n');
-
 			//Текуший год
 			$currentYear = date('Y');
 
@@ -107,7 +101,7 @@
 			$numberOfWorkDaysInCurrentMonth = 1;
 
 			//Текущая дата в формате день.месяц.год (без ведущих нулей)
-			$currentDayString = $currentDayInThisMonth.".".$currentMonth.".".$currentYear;
+			$currentDayString = date('j').".".date('n').".".$currentYear;
 
 			//Таймштамп текущего дня
 			$timestampOfCurrentDay = strtotime($currentDayString);
@@ -118,7 +112,7 @@
 				$dayPlusOne = $day+1;
 
 				//Строковое представление даты
-				$dateString = $dayPlusOne.".".$currentMonth.".".$currentYear;
+				$dateString = $dayPlusOne.".".date('n').".".$currentYear;
 
 				//Таймштапм 
 				$timestamp = strtotime($dateString);
