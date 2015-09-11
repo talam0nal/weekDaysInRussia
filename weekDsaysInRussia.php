@@ -47,7 +47,7 @@
 			Если в текущем месяце есть праздники, возвращает true
 		*/
 		function currentMonthHaveRedLettersDays() {
-			return in_array(date('n'), $this->monthInThisYearWithRedLetterDays());
+			return in_array(11, $this->monthInThisYearWithRedLetterDays());
 		}
 
 		/*
@@ -56,7 +56,9 @@
 		function redLetterDaysInThisMonth() {
 			$apiResponse = $this->getRussianRedLetterDays();
 			$days = [];
-			foreach ($apiResponse->data->{date('Y')}->{11} as $key => $value) $days[] = $key;
+			foreach ($apiResponse->data->{date('Y')}->{11} as $key => $value) {
+				if ($value->isWorking === 2) $days[] = $key;
+			}
 			return $days;
 		}
 
@@ -118,14 +120,24 @@
 			
 			for ($day=0; $day < date('t'); $day++) {
 				$dayPlusOne = $day+1;
-				$timestamp = strtotime($dayPlusOne.".".date('n').".".date('Y'));
+				$timestamp = strtotime($dayPlusOne."."."11".".".date('Y'));
 
 				if ( $this->currentMonthHaveRedLettersDays() ) {
-					//требуется особая проверка
-					//теперь нужно определить входит ли конкретно этот день в список выходных исключений
+					if ( $this->thisDayIsHoliday($dayPlusOne) ) {
+
+					} else {
+						if ( !in_array(date('D', $timestamp), $this->weekEndDays) ) {
+							$numberOfWorkDaysInCurrentMonth++;
+						}
+
+						if ($timestamp === strtotime(date('j.11.Y'))) {
+							$currentWorkingDayInThisMonth = $numberOfWorkDaysInCurrentMonth-1;
+						}
+
+					}
 				} else {
 					//особой проверки не требуется, следовательно работаем по обычному алгоритму
-					if (!in_array(date('D', $timestamp), $this->weekEndDays)) {
+					if ( !in_array(date('D', $timestamp), $this->weekEndDays) ) {
 						$numberOfWorkDaysInCurrentMonth++;
 					}
 
