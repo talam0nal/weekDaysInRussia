@@ -62,6 +62,18 @@
 			return $days;
 		}
 
+		/*
+			Возвращает количество сокращённых дней в месяце
+		*/
+		function shortenedWorkingDaysInThisMonth() {
+			$apiResponse = $this->getRussianRedLetterDays();
+			$days = [];
+			foreach ($apiResponse->data->{date('Y')}->{11} as $key => $value) {
+				if ($value->isWorking === 3) $days[] = $key;
+			}
+			return count($days);			
+		}
+
 		function thisDayIsHoliday($day) {
 			return in_array($day, $this->redLetterDaysInThisMonth());
 		}
@@ -96,7 +108,7 @@
 		*/
 		function numberOfWorkingHoursInThisMonth() {
 			$array = $this->workAndWeekendDaysInThisMonth();
-			return $array[0]*$this->workingHoursPerDay;		
+			return ($array[0]*$this->workingHoursPerDay)-$this->shortenedWorkingDaysInThisMonth();		
 		}
 
 		/*
