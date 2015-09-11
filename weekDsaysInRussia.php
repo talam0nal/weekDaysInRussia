@@ -1,6 +1,8 @@
 <?php
 	class weekDaysInRussia {
-		public $test = [];
+		protected $test = [];
+		protected $redLettersApiURL = 'http://basicdata.ru/api/json/calend/';
+
 		function weekDaysInRussia() {
 			/*
 				Демо
@@ -19,7 +21,7 @@
 			Делает запрос к API со списком праздничных дней в России
 		*/
 		function getRussianRedLetterDays() {
-			$data = json_decode(file_get_contents('http://basicdata.ru/api/json/calend/'), false);
+			$data = json_decode(file_get_contents($this->redLettersApiURL), false);
 			return $data;
 		}
 
@@ -85,31 +87,8 @@
 		- 0 - количество рабочих дней в текущем месяце
 		- 1 - количество рабочих часов в текущем месяце
 		- 2 - текущий будний день в этом месяце
-		API будет возвращать данные в JSON:
-			,"2015":{
-			"1":{"1":{"isWorking":2},
-			"2":{"isWorking":2},
-			"5":{"isWorking":2},
-			"6":{"isWorking":2},
-			"7":{"isWorking":2},
-			"8":{"isWorking":2},
-			"9":{"isWorking":2}},
-			"2":{"20":{"isWorking":3},
-			"23":{"isWorking":2}},
-			"3":{"6":{"isWorking":3},
-			"9":{"isWorking":2}},
-			"4":{"30":{"isWorking":3}},
-			"5":{"1":{"isWorking":2},
-			"4":{"isWorking":2},
-			"8":{"isWorking":3},
-			"11":{"isWorking":2}},
-			"6":{"11":{"isWorking":3},
-			"12":{"isWorking":2}},
-			"11":{"3":{"isWorking":3},
-			"4":{"isWorking":2}},
-			"12":{
-			"31":{"isWorking":3}}}}}
 	*/
+
 	function workAndWeekendDaysInThisMonth() {
 		//Общее количество дней в текущем месяце
 		$daysInTheMonth = date('t');
