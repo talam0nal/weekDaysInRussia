@@ -47,7 +47,7 @@
 			Если в текущем месяце есть праздники, возвращает true
 		*/
 		function currentMonthHaveRedLettersDays() {
-			return in_array(11, $this->monthInThisYearWithRedLetterDays());
+			return in_array(date('n'), $this->monthInThisYearWithRedLetterDays());
 		}
 
 		/*
@@ -56,7 +56,7 @@
 		function redLetterDaysInThisMonth() {
 			$apiResponse = $this->getRussianRedLetterDays();
 			$days = [];
-			foreach ($apiResponse->data->{date('Y')}->{11} as $key => $value) {
+			foreach ($apiResponse->data->{date('Y')}->{date('n')} as $key => $value) {
 				if ($value->isWorking === 2) $days[] = $key;
 			}
 			return $days;
@@ -68,7 +68,7 @@
 		function shortenedWorkingDaysInThisMonth() {
 			$apiResponse = $this->getRussianRedLetterDays();
 			$days = [];
-			foreach ($apiResponse->data->{date('Y')}->{11} as $key => $value) {
+			foreach ($apiResponse->data->{date('Y')}->{date('n')} as $key => $value) {
 				if ($value->isWorking === 3) $days[] = $key;
 			}
 			return count($days);			
@@ -133,7 +133,7 @@
 			
 			for ($day=0; $day < date('t'); $day++) {
 				$dayPlusOne = $day+1;
-				$timestamp = strtotime($dayPlusOne."."."11".".".date('Y'));
+				$timestamp = strtotime($dayPlusOne.".".date('n').".".date('Y'));
 
 				if ( $this->currentMonthHaveRedLettersDays() ) {
 					if ( $this->thisDayIsHoliday($dayPlusOne) ) {
@@ -143,7 +143,7 @@
 							$numberOfWorkDaysInCurrentMonth++;
 						}
 
-						if ($timestamp === strtotime(date('j.11.Y'))) {
+						if ($timestamp === strtotime(date('j.n.Y'))) {
 							$currentWorkingDayInThisMonth = $numberOfWorkDaysInCurrentMonth-1;
 						}
 
