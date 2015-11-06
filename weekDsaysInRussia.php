@@ -3,6 +3,7 @@
 		protected $workingHoursPerDay = 8;
 		protected $redLettersApiURL = 'http://basicdata.ru/api/json/calend/';
 		protected $weekEndDays = ['Sat', 'Sun'];
+		protected $data = false;
 		protected $russianMonthInPrepositional = [
 			'',
 			'январе',
@@ -85,8 +86,9 @@
 			Делает запрос к API со списком праздничных дней в России
 		*/
 		function getRussianRedLetterDays() {
-			$data = json_decode(file_get_contents($this->redLettersApiURL));
-			return $data;
+			if ($this->data) return $this->data;
+			$this->data = json_decode(file_get_contents($this->redLettersApiURL));
+			return $this->data;
 		}
 
 		/*
