@@ -22,7 +22,8 @@
 		/*
 			Демо
 		*/
-		function weekDaysInRussia() {
+		function weekDaysInRussia() 
+		{
 			echo "В ".$this->currentRussianMonthInPrepositional();
 			echo " ";
 			echo $this->numberOfWorkDaysInCurrentMonth();
@@ -36,7 +37,8 @@
 		/*
 			Возвращает список месяцев в которых есть праздники
 		*/
-		function monthInThisYearWithRedLetterDays() {
+		function monthInThisYearWithRedLetterDays() 
+		{
 			$apiResponse = $this->getRussianRedLetterDays();
 			$months = [];
 			foreach ($apiResponse->data->{date('Y')} as $key => $value) $months[] = $key;
@@ -46,14 +48,16 @@
 		/* 
 			Если в текущем месяце есть праздники, возвращает true
 		*/
-		function currentMonthHaveRedLettersDays() {
+		function currentMonthHaveRedLettersDays() 
+		{
 			return in_array(date('n'), $this->monthInThisYearWithRedLetterDays());
 		}
 
 		/*
 			Возвращает сокращённые и выходные дни в текущем месяце
 		*/
-		function redLetterDaysInThisMonth() {
+		function redLetterDaysInThisMonth() 
+		{
 			$apiResponse = $this->getRussianRedLetterDays();
 			$days = [];
 			foreach ($apiResponse->data->{date('Y')}->{date('n')} as $key => $value) {
@@ -65,7 +69,8 @@
 		/*
 			Возвращает количество сокращённых дней в месяце
 		*/
-		function shortenedWorkingDaysInThisMonth() {
+		function shortenedWorkingDaysInThisMonth() 
+		{
 			$apiResponse = $this->getRussianRedLetterDays();
 			$days = [];
 			foreach ($apiResponse->data->{date('Y')}->{date('n')} as $key => $value) {
@@ -77,14 +82,16 @@
 		/* 
 			Проверяет, является ли этот день выходным
 		*/
-		function thisDayIsHoliday($day) {
+		function thisDayIsHoliday($day) 
+		{
 			return in_array($day, $this->redLetterDaysInThisMonth());
 		}
 
 		/*
 			Делает запрос к API со списком праздничных дней в России
 		*/
-		function getRussianRedLetterDays() {
+		function getRussianRedLetterDays() 
+		{
 			$data = json_decode(file_get_contents($this->redLettersApiURL));
 			return $data;
 		}
@@ -92,7 +99,8 @@
 		/*
 			Возвращает текущий месяц на русском языке в предложном падеже
 		*/
-		function currentRussianMonthInPrepositional() {
+		function currentRussianMonthInPrepositional() 
+		{
 			$month = date('n');
 			$array = $this->russianMonthInPrepositional;
 			return $array[$month];
@@ -101,7 +109,8 @@
 		/*
 			Возращает количество рабочих дней в текущем месяце
 		*/		
-		function numberOfWorkDaysInCurrentMonth() {
+		function numberOfWorkDaysInCurrentMonth() 
+		{
 			$array = $this->workAndWeekendDaysInThisMonth();
 			return $array[0];
 		}
@@ -109,7 +118,8 @@
 		/*
 			Возвращает количество рабочих часов в текущем месяце 
 		*/
-		function numberOfWorkingHoursInThisMonth() {
+		function numberOfWorkingHoursInThisMonth() 
+		{
 			$array = $this->workAndWeekendDaysInThisMonth();
 			return ($array[0]*$this->workingHoursPerDay)-$this->shortenedWorkingDaysInThisMonth();		
 		}
@@ -117,7 +127,8 @@
 		/*
 			Возращает текущий рабочий день в месяце
 		*/
-		function currentWorkingDay() {
+		function currentWorkingDay() 
+		{
 			$array = $this->workAndWeekendDaysInThisMonth();
 			return $array[1];
 		}
@@ -128,7 +139,8 @@
 			- 0 - количество рабочих дней в текущем месяце
 			- 1 - текущий будний день в этом месяце
 		*/
-		function workAndWeekendDaysInThisMonth() {
+		function workAndWeekendDaysInThisMonth() 
+		{
 			$numberOfWorkDaysInCurrentMonth = 1;
 			
 			for ($day=0; $day < date('t'); $day++) {
