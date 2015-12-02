@@ -1,5 +1,6 @@
 <?php
-	class weekDaysInRussia {
+	class weekDaysInRussia 
+	{
 		protected $workingHoursPerDay = 8;
 		protected $redLettersApiURL = 'http://basicdata.ru/api/json/calend/';
 		protected $weekEndDays = ['Sat', 'Sun'];
