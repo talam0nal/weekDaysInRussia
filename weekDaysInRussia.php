@@ -99,7 +99,8 @@
 			if ($this->data) {
 				return $this->data;	
 			}
-			$data = json_decode(file_get_contents($this->redLettersApiURL));
+			$string = file_get_contents($this->redLettersApiURL);
+			$data = json_decode($string);
 			return $data;
 		}
 
@@ -150,8 +151,8 @@
 		{
 			$numberOfWorkDaysInCurrentMonth = 1;
 			
-			for ($day=0; $day < date('t'); $day++) {
-				$dayPlusOne = $day+1;
+			for ($day = 0; $day < date('t'); $day++) {
+				$dayPlusOne = $day + 1;
 				$timestamp = strtotime($dayPlusOne.".".date('n').".".date('Y'));
 
 				if ( $this->currentMonthHaveRedLettersDays() ) {
