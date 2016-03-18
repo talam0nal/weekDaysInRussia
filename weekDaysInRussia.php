@@ -43,7 +43,9 @@
 		{
 			$apiResponse = $this->getRussianRedLetterDays();
 			$months = [];
-			foreach ($apiResponse->data->{date('Y')} as $key => $value) $months[] = $key;
+			foreach ($apiResponse->data->{date('Y')} as $key => $value) {
+				$months[] = $key;
+			}
 			return $months;
 		}
 
@@ -94,7 +96,9 @@
 		*/
 		public function getRussianRedLetterDays() 
 		{
-			if ($this->data) return $this->data;
+			if ($this->data) {
+				return $this->data;	
+			}
 			$data = json_decode(file_get_contents($this->redLettersApiURL));
 			return $data;
 		}
