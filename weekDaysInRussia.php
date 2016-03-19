@@ -77,7 +77,8 @@
         {
             $apiResponse = $this->getRussianRedLetterDays();
             $days = [];
-            foreach ($apiResponse->data->{date('Y')}->{date('n')} as $key => $value) {
+            $months = $apiResponse->data->{date('Y')}->{date('n')};
+            foreach ($months as $key => $value) {
                 if ($value->isWorking === 3) $days[] = $key;
             }
             return count($days);            
